@@ -102,16 +102,16 @@ Crear el archivo que empleará el programa:
 *      ipyrad -n U80M50
 Visualizar el archivo creado: 
 *      nano params-U80M50.txt
-**Modificar el params:** 
-## [1] [project_dir]: Project dir: Especificar directorio de los archivos de salida: /axolote/popgen_01/GP/04.ipyrad
-## [4] [sorted_fastq_path]: Location of demultiplexed/sorted fastq files. /axolote/popgen_data/GP/02.trimmomatic/*fq.gz
-## [7] [datatype]: Datatype (see docs): rad, gbs, ddrad, etc.: gbs
-## [8] [restriction_overhang]:poner el sitio de corte de mis enzimas: AATTC, CTAGC, CTAGA (para EcoR1, Xba y NheI)
-## [14] [clust_threshold]: Clustering threshold for de novo assembly: poner el umbral de similitud para la creación de clusters (en este ejemplo 0.80)
-## [21] [min_samples_locus]: Min # samples per locus for output: depende del tamaño de muestra y cuanto missing data acaptaré 40----100
+## Modificar el params:
+ **[1] [project_dir]:** Project dir: Especificar directorio de los archivos de salida: /axolote/popgen_01/GP/04.ipyrad
+ **[4] [sorted_fastq_path]:** Location of demultiplexed/sorted fastq files. /axolote/popgen_data/GP/02.trimmomatic/*fq.gz
+ **[7] [datatype]:** Datatype (see docs): rad, gbs, ddrad, etc.: gbs
+ **[8] [restriction_overhang]:** poner el sitio de corte de mis enzimas: AATTC, CTAGC, CTAGA (para EcoR1, Xba y NheI)
+ **[14] [clust_threshold]:** Clustering threshold for de novo assembly: poner el umbral de similitud para la creación de clusters (en este ejemplo 0.80)
+ **[21] [min_samples_locus]:** Min # samples per locus for output: depende del tamaño de muestra y cuanto missing data acaptaré 40----100
    x----50 (estoy aceptando un 50% de missing data)
    x=20 (mínimo número de muestras que debe tener un locus para que este sea retenido)
-## [27] [output_formats]: Output formats (see docs): acá coloco * para que me genere todos los formatos posibles de outputs
+ **[27] [output_formats]:** Output formats (see docs): acá coloco * para que me genere todos los formatos posibles de outputs
 
 Una vez modificador el params, procedemos a correr el programa en la carpeta donde está el archivo params.txt: 
 *      ipyrad -p params-U80M50.txt -s 1234567 -c 4 -f --MPI  
@@ -126,14 +126,14 @@ NOTA: Con umbral de similitud de 85% y con 30% de missing data obtuve 475 loci. 
       Con umbral de similitud de 80% y con 50% de missing data obtuve 1098 loci.     
   
 
-Nota adicional (NO LO HAREMOS AHORA)
+Nota adicional **(NO LO HAREMOS AHORA)**
 *Si queremos descartar muestras de nuestro análisis (por ejemplo porque tengan pocos reads luego de los filtros aplicados), podemos crear un nuevo params y correr SOLAMENTE el último paso de ipyrad
 
 *      ipyrad -p params-original.txt -b nuevo_params Ids_ipyrad.txt -c 24
 
 Ids_ipyrad.txt: archivo.txt creado previamente que contiene solo el nombre de las muestras de interés para un determinado análisis
 
-*Sobre el nuevo params podemos hacer modificaciones para otras pruebas, por ejemplo cambiar el % de missing data 
+**Sobre el nuevo params podemos hacer modificaciones para otras pruebas, por ejemplo cambiar el % de missing data** 
 
 Correr nuevamente el paso 7 de ipyrad, con el nuevo params:
 *      ipyrad -p nuevo_params.txt -s 7 -c 4 --MPI
