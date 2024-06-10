@@ -18,7 +18,7 @@ ssh popgen_20@132.248.15.30 -p 7915 -o ServerAliveInterval=60
 Iniciamos con un total de 40 muestras, ubicadas en la carpeta nombrada 00.rawdata
 
 Visualizar la calidad de los datos crudos: FastQC (solo lo haremos para la población Ccalk)
-*     fastqc Ccalk
+*     fastqc Ccalk*
 
 En mi Escritorio: 
 *Crear la carpeta GP*
@@ -95,7 +95,7 @@ y listo! Nuestro ambiente conda ya está habilitado y listo para correr ipyrad
  
 Posicionarnos dentro de GP y crear la carpeta 04.ipyrad. Esta carpeta va a contener los resultados del llamado de SNPs con ipyrad.
 *      mkdir 04.ipyrad
-*      8cd 04.ipyrad
+*      cd 04.ipyrad
 
 
 Crear el archivo que empleará el programa: 
@@ -109,8 +109,8 @@ Visualizar el archivo creado:
 ## [8] [restriction_overhang]:poner el sitio de corte de mis enzimas: AATTC, CTAGC, CTAGA (para EcoR1, Xba y NheI)
 ## [14] [clust_threshold]: Clustering threshold for de novo assembly: poner el umbral de similitud para la creación de clusters (en este ejemplo 0.80)
 ## [21] [min_samples_locus]: Min # samples per locus for output: depende del tamaño de muestra y cuanto missing data acaptaré 40----100
-                                                                                                                               x----50 (estoy aceptando un 50% de missing data)
-                                                                                                                               x=20 (mínimo número de muestras que debe tener un locus para que este sea retenido)
+   x----50 (estoy aceptando un 50% de missing data)
+   x=20 (mínimo número de muestras que debe tener un locus para que este sea retenido)
 ## [27] [output_formats]: Output formats (see docs): acá coloco * para que me genere todos los formatos posibles de outputs
 
 Una vez modificador el params, procedemos a correr el programa en la carpeta donde está el archivo params.txt: 
@@ -147,18 +147,18 @@ VCFtools: utiliza el archivo .vcf resultante de ipyrad
 Posicionarnos en la carpeta donde está en .vcf (carpeta_outfiles generada por ipyrad)
 
 Correr vcftools, definiendo el MAF 
-vcftools --vcf U80M50.vcf --maf 0.02 --thin 1000 --min-alleles 2 --max-alleles 2 --recode --out U80M50_vcf0.02
-   --maf minor allele frequency. El maf dependerá de mi tamaño de muestra. (en este ejemplo el alelo tiene que estar en una frecuencia mayor o igual al 2%)     
-   --thin 1000 puedo usarlo para eliminar loci ligados. Solo retiene un snp cada 1000 pb
-   --min-alelos 2 --max-alelos 2: solo se quedan los sitios bialélicos 
-   --recode genera un archivo.vcf 
-   --plink genera un archivo.ped y un .map. (no puedo correr en una misma línea el --recode y el --plink)
+*      vcftools --vcf U80M50.vcf --maf 0.02 --thin 1000 --min-alleles 2 --max-alleles 2 --recode --out U80M50_vcf0.02
+   **'--maf minor allele frequency.'** El maf dependerá de mi tamaño de muestra. (en este ejemplo el alelo tiene que estar en una frecuencia mayor o igual al 2%)     
+   **'--thin 1000'** puedo usarlo para eliminar loci ligados. Solo retiene un snp cada 1000 pb
+   **'--min-alelos 2 --max-alelos 2'**: solo se quedan los sitios bialélicos 
+   **'--recode'** genera un archivo.vcf 
+   **'--plink'** genera un archivo.ped y un .map. (no puedo correr en una misma línea el --recode y el --plink)
 
    
 *Repito la corrida pero cambiando la opción recode por plink*
-vcftools --vcf U80.vcf --maf 0.02 --thin 1000 --min-alleles 2 --max-alleles 2 --plink --out U80M50_vcf0.02
--Visualizar el .log para ver cuantos sitios se mantienen, luego del filtrado
-Después del filtrado en VCFtools, me quedé con 820 loci.  
+*      vcftools --vcf U80.vcf --maf 0.02 --thin 1000 --min-alleles 2 --max-alleles 2 --plink --out U80M50_vcf0.02
+-Visualizar el **'.log'** para ver cuantos sitios se mantienen, luego del filtrado
+Después del filtrado en **'VCFtools'** , me quedé con 820 loci.  
 
 Los 4 archivos los descargo del servidor a mi compu (.ped .map .log .vcf). Guardárlos en el Escritorio para ahí correr Plinkl.
 
@@ -172,7 +172,7 @@ Plink: utiliza el archivo
 -Correr Plink desde la terminal de mi compu (cmp, simbolo de sistema). Lo corro para evaluar loci en EHW y para obtener el archivo .bed que utiliza fastStructure
  Ubicarme en Desktop  
 *     cd Desktop 
- HWE plink2 --vcf U80M50_vcf0.02.recode.vcf --hardy --recode vcf --out U80M50_vcf0.02_HWE
+*     HWE plink2 --vcf U80M50_vcf0.02.recode.vcf --hardy --recode vcf --out U80M50_vcf0.02_HWE
  Esto crea un nuevo archivo .vcf conformado por los SNPs que pasaron el filtro de HW. 
  Subir el nuevo vcf a la carpeta U80M50_outfiles
 *     scp -r -P 7915 /home/Massi/Desktop/U80M50_vcf0.02_HWE.vcf malfonso@132.248.15.30:/botete/malfonso/GP/04.ipyrad/U80M50_outfiles/
