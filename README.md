@@ -4,7 +4,7 @@ Durante nuestras prácticas, estaremos trabajando en el servidor del ICMyL (Chih
 Ustedes estarán trabajando en el disco axolote del servidor, por lo que deben ser ajustadas las direcciones proporcionadas más adelante 
 
 *Conectarse al servidor*
-ssh popgen_20@132.248.15.30 -p 7915 -o ServerAliveInterval=60  
+*     ssh popgen_20@132.248.15.30 -p 7915 -o ServerAliveInterval=60  
 
 *Crear la carperta GP (carpeta que contendrá todos los archivos de trabajo del curso)*
 *     mkdir GP
