@@ -49,7 +49,7 @@ Se recuperan 130666 reads
 
 Una vez seleccionados y verificados los parámetros en algunas muestras, la corrida se realiza para todo nuestro set de datos (NO LO HAREMOS AHORA):
 Dentro de la carpeta GP, crear una nueva carpeta nombrada 02.trimmomatic. Esta carpeta va a contener los archivos fastq.gz ya limpios.
-mkdir 02.trimmomatic
+*     mkdir 02.trimmomatic
 
 **todas las secuencias juntas (loop)
 *     for i in GP/00.rawdata/*.gz; do
@@ -61,9 +61,9 @@ Ejemplo: $i=Ccalk_2.fastqc
 
 
 ## 2- Llamado de SNPs: ipyrad
-Para correr **'ipyrad'** necesitamos activar el ambiente conda:
+Para correr **`ipyrad`** necesitamos activar el ambiente conda:
 Posicionarnos en la carpeta de usuario /axolote/popgen_20
-Con el comando **'ll -a'** veremos todos los archivos ocultos que están en nuestro usuario. En este momento el que nos interesa es el .bashrc
+Con el comando **`ll -a`** veremos todos los archivos ocultos que están en nuestro usuario. En este momento el que nos interesa es el .bashrc
 Abrimos el archivo de texto .bashrc
 *     nano .bashrc
 Y al final de ese archivo copiamos lo siguiente:
@@ -88,7 +88,7 @@ Y al final de ese archivo copiamos lo siguiente:
 **Posteriormente, tecleamos lo siguiente en la terminal**
 *      source .bashrc
 
-y listo! Nuestro ambiente conda ya está habilitado y listo para correr ipyrad
+y listo! Nuestro ambiente conda ya está habilitado y listo para correr **`ipyrad`**
 
 *      conda activate ipyrad
 
@@ -142,22 +142,22 @@ Revisar carpeta_outfiles  archivo_stats.txt para ver cómo se ha modificado el n
 Desactivar ambiente conda
 *      conda deactivate
 
-##  3- Filtrados adicionales: VCFtools y Plink
+##  3- Filtrados adicionales:    **`VCFtools`**   y  **`Plink`**
 VCFtools: utiliza el archivo .vcf resultante de ipyrad
 Posicionarnos en la carpeta donde está en .vcf (carpeta_outfiles generada por ipyrad)
 
 Correr vcftools, definiendo el MAF 
 *      vcftools --vcf U80M50.vcf --maf 0.02 --thin 1000 --min-alleles 2 --max-alleles 2 --recode --out U80M50_vcf0.02
-   **'--maf minor allele frequency.'** El maf dependerá de mi tamaño de muestra. (en este ejemplo el alelo tiene que estar en una frecuencia mayor o igual al 2%)     
-   **'--thin 1000'** puedo usarlo para eliminar loci ligados. Solo retiene un snp cada 1000 pb
-   **'--min-alelos 2 --max-alelos 2'**: solo se quedan los sitios bialélicos 
-   **'--recode'** genera un archivo.vcf 
-   **'--plink'** genera un archivo.ped y un .map. (no puedo correr en una misma línea el --recode y el --plink)
+   **`--maf minor allele frequency.`** El maf dependerá de mi tamaño de muestra. (en este ejemplo el alelo tiene que estar en una frecuencia mayor o igual al 2%)     
+   **`--thin 1000`** puedo usarlo para eliminar loci ligados. Solo retiene un snp cada 1000 pb
+   **`--min-alelos 2 --max-alelos 2`**: solo se quedan los sitios bialélicos 
+   **`--recode`** genera un archivo.vcf 
+   **`--plink`** genera un archivo.ped y un .map. (no puedo correr en una misma línea el --recode y el --plink)
 
    
 *Repito la corrida pero cambiando la opción recode por plink*
 *      vcftools --vcf U80.vcf --maf 0.02 --thin 1000 --min-alleles 2 --max-alleles 2 --plink --out U80M50_vcf0.02
--Visualizar el **'.log'** para ver cuantos sitios se mantienen, luego del filtrado
+-Visualizar el **`.log`** para ver cuantos sitios se mantienen, luego del filtrado
 Después del filtrado en **'VCFtools'** , me quedé con 820 loci.  
 
 Los 4 archivos los descargo del servidor a mi compu (.ped .map .log .vcf). Guardárlos en el Escritorio para ahí correr Plinkl.
@@ -168,7 +168,7 @@ Los 4 archivos los descargo del servidor a mi compu (.ped .map .log .vcf). Guard
       scp -r -P 7915 malfonso@132.248.15.30:/botete/malfonso/GP/04.ipyrad/U80_outfiles/*.ped /home/Massi/Desktop
 
 
-Plink: utiliza el archivo 
+**`Plink`**: utiliza el archivo 
 -Correr Plink desde la terminal de mi compu (cmp, simbolo de sistema). Lo corro para evaluar loci en EHW y para obtener el archivo .bed que utiliza fastStructure
  Ubicarme en Desktop  
 *     cd Desktop 
