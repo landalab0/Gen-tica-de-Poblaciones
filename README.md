@@ -23,7 +23,7 @@ Visualizar la calidad de los datos crudos: FastQC (solo lo haremos para la pobla
 En mi Escritorio: 
 *Crear la carpeta GP*
 Copiar los html del servidor a mi compu para poder visualizarlos (en la terminal de mi compu)
-*     scp -r -P 7915 popgen_01@132.248.15.30:/axolote/popgen_20/GP/00.rawdata/*.html /home/Massi/Desktop/GP
+*     scp -r -P 7915 popgen_01@132.248.15.30:/axolote/popgen_20/GP/00.rawdata/*.html .
 
 Puntos claves a revisar en FastQC: Per base sequence content y Sequence Length Distribution
 
@@ -40,7 +40,7 @@ Correr fastQC para ir verificando los parámetros de limpieza utilizados
 *     fastqc Ccalk_2_trimm.fastq.gz
 
 Copiar el html del servidor a mi compu para poder visualizarlos (en la terminal de mi compu)
-*     scp -r -P 7915 popgen_20@132.248.15.30:/axolote/popgen_20/GP/00.rawdata/Ccalk_2_trimm_fastqc.html /home/Massi/Desktop/GP
+*     scp -r -P 7915 popgen_20@132.248.15.30:/axolote/popgen_20/GP/00.rawdata/Ccalk_2_trimm_fastqc.html .
 Se recuperan 130666 reads
 
 
