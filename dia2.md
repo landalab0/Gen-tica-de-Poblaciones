@@ -1,4 +1,10 @@
-## Como instalar programas dentrode un ambiente conda
+## Obtención de datos para el uso de Admixture
+*     mkdir $HOME/05.Admixture
+*     cp /axolote/popgen_data/admixture* $HOME/05.Admixture
+*     cp /axolote/popgen_data/Chr-rename.sh $HOME/05.Admixture
+*     cp /axolote/popgen_data/*vcf $HOME/05.Admixture
+
+## Como instalar programas dentro de un ambiente conda
 
 **1. Abra la terminal en su sistema operativo favorito (preferentemente uno que sea base linux)**
 
