@@ -2,7 +2,7 @@
 
 *Correr admixture puede representar un ligero problema con la codificación del nombre de cada cromosoma cuando la identificación de SNPs se realiza con el genoma de referencia. Por ello es importante. Para evitar ese problema hay múltiples maneras:*
 
-* 1. La primera que se me ocurre es que editen el fasta del genoma de referencia antes de hacer el llamado de SNPs. De esta manera el vcf de datos crudos ya tendrá asignados los nombres de cada cromosoma con número. Ojo, recuerda que muchos programas solo aceptan la numeración hasta 23, por ello mi recomendación es que el cromosoma 24 lo llames 124 y asi sucesivamente.
+* 1.- La primera que se me ocurre es que editen el fasta del genoma de referencia antes de hacer el llamado de SNPs. De esta manera el vcf de datos crudos ya tendrá asignados los nombres de cada cromosoma con número. Ojo, recuerda que muchos programas solo aceptan la numeración hasta 23, por ello mi recomendación es que el cromosoma 24 lo llames 124 y asi sucesivamente.
 
 *  2.- Si tienes ya un vcf como el que te dieron en este curso, podemos cambiar el nombre de los cromosomas usando awk. Este comando  es una herramienta de procesamiento de texto poderosa y versátil que se utiliza en sistemas Unix y Linux. Se usa principalmente para procesar patrones en archivos de texto o en la salida de comandos.
 
