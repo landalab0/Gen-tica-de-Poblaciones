@@ -42,10 +42,10 @@ Comunmente incluyen loci y genotipos
 ### indices de endogamia
 *     Fis_Raw.pop <-as.data.frame(BasicSS_pop$Fis)
 
-#plot de diversidddes
-'colores<-c("red","hotpink","black","darkorange","chartreuse4",
+## plot de diversidddes
+`colores<-c("red","hotpink","black","darkorange","chartreuse4",
            "blue","greenyellow","coral1","darkorchid1",
-           "saddlebrown")' 
+           "saddlebrown")`
 
 ## las siguientes instrucciones son para plotear
 `Ho.pop<-barplot(colMeans(Div_Raw.Ho.pop,na.rm=T),las=2,main="Ho", 
