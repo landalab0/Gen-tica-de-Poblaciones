@@ -10,8 +10,8 @@ Primero debemos copiar el archivo "moschata_minDP5_geno_50_mind_50_MAF0.05.plink
 
 **En Consola  llamamos a la liberia pcadapt**
 Esta libreria nos ayuda a detectar outliers en datos genomicos, basado en un analisis de componentes principales
-*     library(pcadapt)
 
+*     library(pcadapt)
 
 ## leer un archivo con informción de SNP y su loc en cada chr o su pos
  CHR | SNP | BP | AlleleA | AlleleB
@@ -21,32 +21,40 @@ Esta libreria nos ayuda a detectar outliers en datos genomicos, basado en un ana
 *     colnames(loci_info) <- c("CHR", "SNP", "BP","AlleleA", "AlleleB")
 
 ##   En terminal copiar el popmap que usamos con los analisis exploratorios
+
 *     cp ../05.Admixture/popmap-calabazas.csv .
 
 **En Consola**
+
 *     popmap <- read.table("popmap-calabazas.csv", header = T,sep = ",")
 *     popmap <- popmap$POP
 
 ### Leer archivo de entrada, pcadapt acepta de todo (vcf, ped, bed)
+
 *     calabazas <- read.pcadapt("n",type = "vcf")
 
 
 ##  hacemos un PCA
+
 *     calabazas.pca <- pcadapt(calabazas.bed, K=10, method = "mahalanobis", ploidy = 2, min.maf = 0.05)
 *     summary(calabazas.pca)
 
 ### hacer plot y elegir para elegir la K del PCA
+
 *     plot(calabazas.pca, option = "screeplot", K=10)
 
 ### En nuestro caso el valor "correcto" es K=2
+
 *     plot(calabazas.pca, option = "screeplot", K=2)
 
 ## PCA con la agrupacion de POP (la tendencia deberia sr similar a los datos neutros pero no obligatorio)
+
 *     plot(calabazas.pca,option="scores", pop=popmap)
 *     plot(calabazas.pca,option="scores",i = 1, j = 2,pop=popmap)
 
 
 ##  Plot del pcadapt y la K correspodiente
+
 `plot(calabazas.pca, option = "manhattan", K = 2)
  plot(calabazas.pca, option = "qqplot")
  hist(calabazas.pca$pvalues, xlab="p-values", main = NULL, breaks = 50, col = "red")
@@ -55,7 +63,9 @@ Esta libreria nos ayuda a detectar outliers en datos genomicos, basado en un ana
 
 # Como saber cuales son los SNPs candidatos?
 ### metodo q-values
+
 *     library(qvalue)
+
 `qval <- qvalue(calabazas.pca$pvalues)$qvalues
 alpha1 <- 0.001
 outliers1 <- which(qval < alpha1)
@@ -66,6 +76,7 @@ candidatos1<- as.data.frame(met1)
 candidatos1`
 
 ### metodo Bonferroni correction
+
 `padj2 <- p.adjust(calabazas.pca$pvalues,method="bonferroni")
 alpha2 <- 0.05
 outliers2 <- which(padj2 < alpha2)
@@ -75,9 +86,11 @@ met2`
 
 ### hagamos un plot y señalesmos los SNPs candidatos
 
+
 `plot (-log10(calabazas.pca$pvalues), type="p", col="grey20",
       cex=1.5, pch=20, xlab="SNPs", ylab="-log10(p-value)")
 points(outliers2, -log10(calabazas.pca$pvalues[outliers2]), col = "red", pch=20, cex=2)`
+
 
 *     install.packages("qqman")
 *     library("qqman")
@@ -85,10 +98,12 @@ points(outliers2, -log10(calabazas.pca$pvalues[outliers2]), col = "red", pch=20,
 
 ## Dejar en numerico los nombres de los cromosomas
 Esto es porque luego no corre si ve elementos alfabeticos
+
 `loci_info$CHR <- gsub("Cmo_Chr", "", loci_info$CHR)
 loci_info$CHR <- as.integer(loci_info$CHR)`
 
 ##  introducir P a loci info
+
 `qval
 P<-qval
 P<-as.data.frame(P)
